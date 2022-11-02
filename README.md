@@ -1,11 +1,15 @@
 ### Setup
+Ruby 2.7.5
+Rails 6
 No diretório em que for clonado o repositório, execute na linha de comando
 - `bundle install`
 - `rake db:create`
 - `rake db:migrate`
 - `rake db:seed`
 DB: `library_development` 
+
 ### Endpoints
+Para iniciar o projeto execute `rails server`
 - Em `http://localhost:3000/` pode ser encontrada a lista de usuários paginada, ao final da lista o botão para criação de novos usuários;
 - Em `http://localhost:3000/users/:id` é descrito um usuário com a opção de editar ou deletar ele
 - Em `http://localhost:3000/users/:id/edit` é possível editar o usuário

@@ -9,6 +9,7 @@ No diretório em que for clonado o repositório, execute na linha de comando
 - `rake db:create`
 - `rake db:migrate`
 - `rake db:seed`
+
 DB: `library_development` 
 
 ### Endpoints

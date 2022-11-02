@@ -1,4 +1,5 @@
 ### Setup
+No diretório em que for clonado o repositório, execute na linha de comando
 - `bundle install`
 - `rake db:create`
 - `rake db:migrate`

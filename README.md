@@ -1,6 +1,9 @@
 ### Setup
+
 Ruby 2.7.5
+
 Rails 6
+
 No diretório em que for clonado o repositório, execute na linha de comando
 - `bundle install`
 - `rake db:create`

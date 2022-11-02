@@ -1,67 +1,63 @@
-# Dialog Rails/Node Test
+### Setup
+- `bundle install`
+- `rake db:create`
+- `rake db:migrate`
+- `rake db:seed`
+DB: `library_development` 
+### Endpoints
+- Em `http://localhost:3000/` pode ser encontrada a lista de usuários paginada, ao final da lista o botão para criação de novos usuários;
+- Em `http://localhost:3000/users/:id` é descrito um usuário com a opção de editar ou deletar ele
+- Em `http://localhost:3000/users/:id/edit` é possível editar o usuário
+- Em `http://localhost:3000/graphiql` é possível acessar a API 
 
-## Objetivo
+- Query para listar todos os usuários 
+``` graphql
+ query{
+   allUsers{
+     id
+     name
+     age
+     sex
+     city
+     uf
+    }
+  }
+```
 
-Desenvolver uma aplicação Rails, com duas páginas de listagem:
+- Mutation para criar novo usuário
+``` graphql
+mutation{
+  createUser(input:{
+    name: "User",
+    age: 25,
+    sex: "Other",
+    city: "São Paulo",
+    uf: "SP"
+  }){
+    id,
+    name,
+    age
+  }
+}
+```
+- Mutation para deletar usuário
+```graphql
+mutation{
+  destroyUser(input: {id:1}){
+    id
+  }
+}
+```
+- Mutation para dar update em usuário
+```graphql
+mutation{
+  updateUser(input:{
+    id: 100
+    name: "Novo nome"
+  }){
+    age
+  }
+}
+```
 
-- banco MySQL, schema deve ser `dialog-rails`
-- tabela `users`
-- campos `id, nome, idade, sexo, cidade, uf`
-- quantidade de registros 100
-- criar e popular tabela com migration(s)
-- 1a página CRUD da tabela `users`
-- 2a página leitura API (irá acessar o endpoint no Node), stack:
-  - Node
-  - REST express
-    - o endpoint de leitura irá acessar diretamente os dados `dialog-rails.users` criada na migration
-    - retorna um JSON, obedecendo a paginação (não pode retornar todos os registros em uma única chamada)
-  - ORM sequelize
-- paginação de 25 registros (tanto no CRUD, como na chamada a API)
-- utilize os diretórios `node` e `rails`
-- utilize os arquivos `.env` na raiz de cada diretório para string de conexão
-  - string de conexão com usuário `root` sem senha
-
-### Executar o projeto
-
-Deverá executar com Rails `rais s` e Node `yarn start`
-
-## Pull Request
-
-Submeter uma PR [para esse repositório](https://github.com/criticalmassbr/dialog-rails-test).
-
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-<<<<<<< HEAD
-- Ruby version
-=======
-- Ruby version - 2.7.5
->>>>>>> Db config
-
-- Rails version - 6.0.5
-
-- System dependencies
-
-  - `bundle install` to install all gems
-
-- Configuration
-
-- Database creation
-
-  - `rake db:create`
-  - `rake db:migrate`
-  - `rake db:seed`
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+> Essa mutation joga um erro após a execução do update (o update roda com sucesso, investiguei mas sem muito sucesso, decidi deixar ela pro crud não ficar incompleto, se descobrirem onde errei aceito sugestões)
